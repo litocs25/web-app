@@ -55,6 +55,5 @@ pipeline{
             emailext body: 'The Deployment is Successful', subject: 'Deployment Success', to: 'info@jomacsit.com'
         }  
       }
-      
     }
 }
