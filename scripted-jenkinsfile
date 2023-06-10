@@ -21,12 +21,12 @@ node(""){
     sh "${MHD}/bin/mvn sonar:sonar"
     sh "echo end of code scan"
   }
-  
+  #
    stage ("4 Slack Notification to Developers"){
     sh "echo send notification to Developers"
     slackSend channel: '#ci-cd', message: 'Successful scan of Artifacts'
   }
-
+#
  stage ("5 Store the Artifact to nexus"){
      sh "echo start upoloading artifact to Nexus"
      sh "${MHD}/bin/mvn deploy"
