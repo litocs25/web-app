@@ -21,38 +21,33 @@ node(""){
     sh "${MHD}/bin/mvn sonar:sonar"
     sh "echo end of code scan"
   }
-  #
-   stage ("4 Slack Notification to Developers"){
-    sh "echo send notification to Developers"
-    slackSend channel: '#ci-cd', message: 'Successful scan of Artifacts'
-  }
-#
- stage ("5 Store the Artifact to nexus"){
+  
+ stage ("4 Store the Artifact to nexus"){
      sh "echo start upoloading artifact to Nexus"
      sh "${MHD}/bin/mvn deploy"
      sh "echo end of upload to Nexus"
   }
     
- stage ("6 Deploy to Tomcat in UAT"){
+ stage ("5 Deploy to Tomcat in UAT"){
      sh "echo deploying to Tomcat server in UAT"
      deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://3.87.61.64:9090')], contextPath: null, war: 'target/*.war'
      sh "echo end of tomcat"
   }
  
- stage ("7 Approval by PM"){
+ stage ("6 Approval by PM"){
     sh ("echo Approval required from PM")
     timeout(time:3, unit:'DAYS'){
     input message: "Approval to deploy to Production Env"}
   } 
   
-stage ("8 Deploy to Tomcat in prod"){
+stage ("7 Deploy to Tomcat in prod"){
      sh "echo deploying to Tomcat server in UAT"
-     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://3.87.61.64:9090')], contextPath: null, war: 'target/*.war'
+     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://3.84.38.55:9090')], contextPath: null, war: 'target/*.war'
      sh "echo end of tomcat"
     
   }
     
- stage ("9 Email notification"){
+ stage ("8 Email notification"){
      sh "echo successful email deployment to tomcat to DevopTeam"
      emailext body: 'Successful deployment of Tomcat server in UAT environment', subject: 'Successful deployment', to: 'isaac.agyemang1@gmail.com'
  }
