@@ -1,6 +1,6 @@
 //scripted
 node(""){
-def MHD = tool name: "maven3.8.6"
+def MHD = tool name: "maven3.88"
 stage('GitClone'){
 sh "echo this is git clone"
 git credentialsId: 'Github-Cred', url: 'https://github.com/jomacs-it/web-app.git'
