@@ -30,7 +30,7 @@ node(""){
     
  stage ("5 Deploy to Tomcat in UAT"){
      sh "echo deploying to Tomcat server in UAT"
-     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://3.87.61.64:9090')], contextPath: null, war: 'target/*.war'
+     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://http://44.204.88.200:9090')], contextPath: null, war: 'target/*.war'
      sh "echo end of tomcat"
   }
  
@@ -42,7 +42,7 @@ node(""){
   
 stage ("7 Deploy to Tomcat in prod"){
      sh "echo deploying to Tomcat server in UAT"
-     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://3.84.38.55:9090')], contextPath: null, war: 'target/*.war'
+     deploy adapters: [tomcat9(credentialsId: 'tomcred2', path: '', url: 'http://44.204.88.200:9090')], contextPath: null, war: 'target/*.war'
      sh "echo end of tomcat"
     
   }
