@@ -1,7 +1,7 @@
 pipeline{
   agent any
   tools{
-    maven "maven3.88"
+    maven "maven3.9.2"
   }
 
     stages{
@@ -45,7 +45,7 @@ pipeline{
       stage("5. Deploying to Tomcat in UAT"){
         steps{
            sh "echo start deploying to server in UAT Env"
-           deploy adapters: [tomcat9(credentialsId: 'tomcat_cred', path: '', url: 'http://3.84.38.55:9090')], contextPath: null, war: 'target/*.war'
+           deploy adapters: [tomcat9(credentialsId: 'tomcat_cred', path: '', url: 'http://3.84.30.175:9090')], contextPath: null, war: 'target/*.war'
         }  
       }
       
